@@ -2,8 +2,7 @@ export class TemplateAnimals {
   getAnimalsTemplate({ image, price, breed, gender, birth_date, weight }) {
     const months = Math.floor((Date.now() - new Date(birth_date)) / 2592000000);
 
-    return `<div class="uk-margin uk-width-medium@s">
-    <div class="uk-card uk-card-default uk-card-hover">
+    return `<div class="uk-card uk-card-default uk-card-hover uk-margin-top uk-margin-bottom">
       <div class="uk-card-media-top">
         <img src="${image}" alt="${breed}">
       </div>
@@ -20,7 +19,6 @@ export class TemplateAnimals {
         <button class="uk-button button__buy">Buy</button>
         <button class="uk-button button__details">Details</button>
       </div>
-    </div>
-  </div>`;
+    </div>`;
   }
 }
