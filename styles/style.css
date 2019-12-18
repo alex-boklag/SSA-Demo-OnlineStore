@@ -1,4 +1,4 @@
-.uk-card, img {
+.uk-card, .uk-card-header, img {
   border-radius: 10px;
 }
 
@@ -27,6 +27,7 @@
 
 .uk-card-media-top {
   overflow: hidden;
+  border-radius: 10px;
 }
 
 .uk-card img {
