@@ -1,4 +1,4 @@
-.uk-card, .uk-card-header, img {
+.uk-card {
   border-radius: 10px;
 }
 
@@ -36,6 +36,7 @@
   object-fit: cover;
   object-position: center 20%;
   transition: all 1s ease-out;
+  border-radius: 10px;
 }
 
 .uk-card img:hover {
