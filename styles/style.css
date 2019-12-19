@@ -42,3 +42,11 @@
 .uk-card img:hover {
   transform: scale(1.2);
 }
+
+.uk-pagination li {
+  cursor: pointer;
+}
+
+.uk-pagination li:hover {
+  color: rgb(255, 166, 0);
+}
