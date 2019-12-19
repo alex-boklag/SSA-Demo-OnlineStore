@@ -33,6 +33,6 @@ export class Controller {
 
   showAnimals(offset, amount) {
     this.model.getAnimals()
-      .then(obj => this.view.renderAnimals(obj.animals, offset, amount));
+      .then(obj => this.view.renderAnimals(obj, offset, amount));
   }
 }
