@@ -20,13 +20,14 @@ export class View {
   }
 
   renderAnimals(animals, offset, amount) {
-    let newsStr = '';
-
-    animals.forEach((animal, index) => {
-      if (index >= offset && index < offset + amount) {
-        newsStr += this.prepareAnimalCard(animal);
-      }
-    });
+    let newsStr = animals
+      .map((animal, index) => {
+        if (index >= offset && index < offset + amount) {
+          return this.prepareAnimalCard(animal);
+        }
+        return '';
+      })
+      .join('');
 
     this.domAnimals.innerHTML = newsStr;
   }
