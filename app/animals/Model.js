@@ -1,6 +1,6 @@
 export class Model {
   constructor() {
-    this.link = '/SSA-Demo-OnlineStore/data/animals-en-general.json';
+    this.link = 'https://maksv21.github.io/softserve/demo2/database/animals_en.json';
   }
 
   getAnimals() {
