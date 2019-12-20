@@ -1,5 +1,5 @@
 export class TemplateAnimals {
-  getAnimalsTemplate({ image, price, breed, gender, birth_date, weight }) {
+  static getAnimalsTemplate({ image, price, breed, gender, birth_date, weight }) {
     const months = Math.floor((Date.now() - new Date(birth_date)) / 2592000000);
 
     return `<div class="uk-card uk-card-default uk-card-hover uk-margin-top uk-margin-bottom">

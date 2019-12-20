@@ -1,3 +1,3 @@
-import { Controller } from './animals/Controller.js';
+import { ControllerAnimals } from './animals/ControllerAnimals.js';
 
-const animals = new Controller();
+const animals = new ControllerAnimals();

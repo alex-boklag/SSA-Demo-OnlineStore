@@ -1,9 +1,8 @@
-import { TemplateAnimals } from '../share/TemplateAnimals.js';
+import { TemplateAnimals } from './TemplateAnimals.js';
 
-export class View {
+export class ViewAnimals {
   constructor() {
     this.domAnimals = document.querySelector('.animals');
-    this.templater = new TemplateAnimals();
   }
 
   addListeners(handleClickPrevPage, handleClickNextPage, handleClickPageNumber) {
@@ -33,6 +32,6 @@ export class View {
   }
 
   prepareAnimalCard(animal) {
-    return this.templater.getAnimalsTemplate(animal);
+    return TemplateAnimals.getAnimalsTemplate(animal);
   }
 }

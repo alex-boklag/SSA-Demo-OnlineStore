@@ -1,10 +1,10 @@
-import { Model } from './Model.js';
-import { View } from './View.js';
+import { ModelAnimals } from './ModelAnimals.js';
+import { ViewAnimals } from './ViewAnimals.js';
 
-export class Controller {
+export class ControllerAnimals {
   constructor() {
-    this.model = new Model();
-    this.view = new View();
+    this.model = new ModelAnimals();
+    this.view = new ViewAnimals();
     this.view.addListeners(this.handleClickPrevPage.bind(this), this.handleClickNextPage.bind(this), this.handleClickPageNumber.bind(this), );
     this.offset = 0;
     this.amount = 20;
