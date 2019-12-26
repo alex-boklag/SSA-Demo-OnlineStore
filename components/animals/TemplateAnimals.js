@@ -21,4 +21,11 @@ export class TemplateAnimals {
       </div>
     </div>`;
   }
+
+  static getPagination() {
+    return `<ul class="uk-pagination uk-flex-center uk-flex-middle" uk-margin>
+      <li class="prev-page"><span uk-pagination-previous></span></li>
+      <li class="next-page"><span uk-pagination-next></span></li>
+    </ul>`;
+  }
 }

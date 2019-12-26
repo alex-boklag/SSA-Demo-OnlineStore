@@ -1,3 +1,11 @@
+.root {
+  background-color: #fafafa;
+}
+
+.search__wrapper .uk-search .uk-search-input {
+  border-radius: 10px;
+}
+
 .uk-card {
   border-radius: 10px;
 }
