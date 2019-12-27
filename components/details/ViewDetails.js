@@ -2,7 +2,7 @@ import { TemplateDetails } from './TemplateDetails.js';
 
 export class ViewDetails {
   constructor() {
-    this.modalWrapper = document.querySelector('.modal__wrapper');
+    this.modalWrapper = document.querySelector('.details__wrapper');
   }
 
   addListener(handleDetailsClick) {
