@@ -1,8 +1,8 @@
 export class ModelAnimals {
   constructor(publish) {
     this.links = {
-      en: 'https://jsonstorage.net/api/items/d301cfd4-7636-4dab-a1ae-753fbca366b4',
-      ru: 'https://maksv21.github.io/softserve/demo2/database/animals_ru.json'
+      en: 'https://alex-boklag.github.io/SSA-Demo-OnlineStore/database/animals_en.json',
+      ru: 'https://alex-boklag.github.io/SSA-Demo-OnlineStore/database/animals_ru.json'
     };
     this.publish = publish;
     this.animalsList;
