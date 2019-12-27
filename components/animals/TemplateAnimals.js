@@ -16,16 +16,16 @@ export class TemplateAnimals {
         </p>
       </div>
       <div class="uk-card-footer uk-text-center uk-padding-small">
-        <button class="uk-button button__buy">Buy</button>
-        <button class="uk-button button__details">Details</button>
+        <button class="uk-button button__buy" type="button" uk-toggle="target: #modal">Buy</button>
+        <button class="uk-button button__details" type="button" uk-toggle="target: #modal-full">Details</button>
       </div>
     </div>`;
   }
 
   static getPagination() {
     return `<ul class="uk-pagination uk-flex-center uk-flex-middle" uk-margin>
-      <li class="prev-page"><span uk-pagination-previous></span></li>
-      <li class="next-page"><span uk-pagination-next></span></li>
+      <li class="prev-page"><span class="prev" uk-pagination-previous></span></li>
+      <li class="next-page"><span class="next" uk-pagination-next></span></li>
     </ul>`;
   }
 }
