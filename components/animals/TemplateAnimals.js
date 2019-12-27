@@ -1,8 +1,8 @@
 export class TemplateAnimals {
-  static getAnimalsTemplate({ image, price, breed, gender, birth_date, weight }) {
+  static getAnimalsTemplate({ id, image, price, breed, gender, birth_date, weight }) {
     const months = Math.floor((Date.now() - new Date(birth_date)) / 2592000000);
 
-    return `<div class="uk-card uk-card-default uk-card-hover uk-margin-top uk-margin-bottom">
+    return `<div class="uk-card uk-card-default uk-card-hover uk-margin-top uk-margin-bottom" data-id="${id}">
       <div class="uk-card-media-top">
         <img src="${image}" alt="${breed}">
       </div>

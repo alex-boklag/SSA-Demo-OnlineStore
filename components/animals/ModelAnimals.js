@@ -24,7 +24,6 @@ export class ModelAnimals {
         localStorage.setItem('pageSize', 20);
         localStorage.setItem('totalPages', Math.ceil(this.animalsList.length / localStorage.pageSize));
         
-        this.publish('total-pages-changed', Number(localStorage.totalPages));
         this.publish('animals-data-updated', this.animalsList.slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize)));
       });
   }

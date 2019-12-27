@@ -2,16 +2,22 @@ import { ModelAnimals } from './ModelAnimals.js';
 import { ViewAnimals } from './ViewAnimals.js';
 
 export class ControllerAnimals {
-  constructor({ subscribe, unsubscribe, publish }) {
+  constructor({ subscribe, publish }) {
     this.publish = publish;
     this.model = new ModelAnimals(publish);
     this.view = new ViewAnimals(subscribe);
     this.listeners = {
+      handleClickDetails: this.handleClickDetails.bind(this),
       handleClickPrevPage: this.handleClickPrevPage.bind(this),
       handleClickNextPage: this.handleClickNextPage.bind(this),
       handleClickPageNumber: this.handleClickPageNumber.bind(this)
     }
     this.view.addListeners(this.listeners);
+  }
+
+  handleClickDetails(ev) {
+    console.log(ev);
+    this.publish('details-click', ev);
   }
 
   handleClickPrevPage() {
