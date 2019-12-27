@@ -20,7 +20,6 @@ export class ControllerSearch {
     localStorage.totalPages = Math.ceil(JSON.parse(localStorage.filteredAnimalsList).length / localStorage.pageSize);
     localStorage.offset = 0;
 
-    this.publish('total-pages-changed', Number(localStorage.totalPages));
     this.publish('search-changed', JSON
       .parse(localStorage.filteredAnimalsList)
       .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize))

@@ -2,7 +2,7 @@ import { TemplateSearch} from './TemplateSearch.js';
 
 export class ViewSearch {
   constructor() {
-    this.root = document.querySelector('.root');
+    this.searchWrapper = document.querySelector('.search__wrapper');
   }
 
   addListeners(handleChangeSearch) {
@@ -10,6 +10,6 @@ export class ViewSearch {
   }
 
   renderSearch() {
-    this.root.insertAdjacentHTML('afterbegin', TemplateSearch.getSearchTemplate());
+    this.searchWrapper.insertAdjacentHTML('afterbegin', TemplateSearch.getSearchTemplate());
   }
 }
