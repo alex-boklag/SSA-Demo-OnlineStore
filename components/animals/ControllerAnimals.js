@@ -5,19 +5,18 @@ export class ControllerAnimals {
   constructor({ subscribe, publish }) {
     this.publish = publish;
     this.model = new ModelAnimals(publish);
-    this.view = new ViewAnimals(subscribe);
+    this.view = new ViewAnimals();
     this.listeners = {
-      handleClickDetails: this.handleClickDetails.bind(this),
       handleClickPrevPage: this.handleClickPrevPage.bind(this),
       handleClickNextPage: this.handleClickNextPage.bind(this),
-      handleClickPageNumber: this.handleClickPageNumber.bind(this)
+      handleClickPageNumber: this.handleClickPageNumber.bind(this),
+      handleClickBuy: this.handleClickBuy.bind(this),
+      handleClickDetails: this.handleClickDetails.bind(this), 
     }
     this.view.addListeners(this.listeners);
-  }
 
-  handleClickDetails(ev) {
-    console.log(ev);
-    this.publish('details-click', ev);
+    subscribe('animals-data-updated', this.view.renderAnimalCards.bind(this.view));
+    subscribe('search-changed', this.view.renderAnimalCards.bind(this.view));
   }
 
   handleClickPrevPage() {
@@ -33,7 +32,7 @@ export class ControllerAnimals {
   }
 
   handleClickNextPage() {
-    if (Number(localStorage.offset) + Number(localStorage.pageSize) < localStorage.animalsList.length) {
+    if (Number(localStorage.offset) + Number(localStorage.pageSize) < JSON.parse(localStorage.filteredAnimalsList).length) {
       localStorage.offset = Number(localStorage.offset) + Number(localStorage.pageSize);
 
       const data = JSON.parse(localStorage.filteredAnimalsList);
@@ -44,17 +43,25 @@ export class ControllerAnimals {
     }
   }
 
-  handleClickPageNumber(ev) {
-    const pageNumber = Number(ev.target.innerText);
-
+  handleClickPageNumber(pageNumber) {
     if (!isNaN(pageNumber)) {
       localStorage.offset = pageNumber * localStorage.pageSize - localStorage.pageSize;
-      
+
       const data = JSON.parse(localStorage.filteredAnimalsList);
       const curPageData = data.slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
 
       this.publish('animals-data-updated', curPageData);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+  }
+
+  handleClickBuy(animalId) {
+    console.log(`buy ${animalId}`);
+    this.publish('buy-click', animalId);
+  }
+
+  handleClickDetails(animalId) {
+    console.log(`details ${animalId}`);
+    this.publish('details-click', animalId);
   }
 }
