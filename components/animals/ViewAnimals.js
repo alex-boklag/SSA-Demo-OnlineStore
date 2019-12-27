@@ -1,20 +1,33 @@
 import { TemplateAnimals } from './TemplateAnimals.js';
 
 export class ViewAnimals {
-  constructor(subscribe) {
-    this.subscribe = subscribe;
+  constructor() {
     this.root = document.querySelector('.root');
     this.animalsWrapper = document.querySelector('.animals__wrapper');
     this.paginationWrapper = document.querySelector('.pagination__wrapper');
-    subscribe('animals-data-updated', this.renderAnimalCards.bind(this));
-    subscribe('search-changed', this.renderAnimalCards.bind(this));
   }
 
   addListeners(handlers) {
-    document.querySelector('.button__details').addEventListener('click', handlers.handleDetailsClick);
-    document.querySelector('.prev-page').addEventListener('click', handlers.handleClickPrevPage);
-    document.querySelector('.next-page').addEventListener('click', handlers.handleClickNextPage);
-    document.querySelector('.uk-pagination').addEventListener('click', handlers.handleClickPageNumber);
+    this.root.addEventListener('click', ev => {
+      if (ev.target.parentNode.parentNode.className.includes('prev')) {
+        handlers.handleClickPrevPage();
+      }
+      else if (ev.target.parentNode.parentNode.className.includes('next')) {
+        handlers.handleClickNextPage();
+      }
+      else if (ev.target.className.includes('page-')) {
+        const pageNumber = Number(ev.target.className.split('page-')[1]);
+        handlers.handleClickPageNumber(pageNumber);
+      }
+      else if (ev.target.className.includes('button__buy')) {
+        const animalId = Number(ev.target.parentNode.parentNode.dataset.id);
+        handlers.handleClickBuy(animalId);
+      }
+      else if (ev.target.className.includes('button__details')) {
+        const animalId = Number(ev.target.parentNode.parentNode.dataset.id);
+        handlers.handleClickDetails(animalId);
+      }
+    });
   }
 
   renderAnimalCards(animalsList) {
