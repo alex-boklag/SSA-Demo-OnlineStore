@@ -14,7 +14,7 @@ export class ControllerSearch {
     let animalsList = JSON.parse(localStorage.animalsList);
     localStorage.filteredAnimalsList = JSON.stringify(animalsList
       .filter(animal => animal.breed.toLowerCase().includes(search)));
-    
+
     localStorage.totalPages = Math.ceil(JSON.parse(localStorage.filteredAnimalsList).length / localStorage.pageSize);
     localStorage.offset = 0;
 
@@ -27,13 +27,16 @@ export class ControllerSearch {
   handleChangeFilter(ev) {
     const filter = ev.target.dataset.value.toLowerCase();
 
-    let animalsList = JSON.parse(localStorage.animalsList);
-    localStorage.filteredAnimalsList = JSON.stringify(animalsList
-      .filter(animal => {
-        console.log(filter, animal.species.toLowerCase());
-        return filter === animal.species.toLowerCase();
-      }));
-    
+    localStorage.filteredAnimalsList = localStorage.animalsList;
+
+    if (filter !== 'all') {
+      let animalsList = JSON.parse(localStorage.animalsList);
+      localStorage.filteredAnimalsList = JSON.stringify(animalsList
+        .filter(animal => {
+          return filter === animal.species.toLowerCase();
+        }));
+    }
+
     localStorage.totalPages = Math.ceil(JSON.parse(localStorage.filteredAnimalsList).length / localStorage.pageSize);
     localStorage.offset = 0;
 
