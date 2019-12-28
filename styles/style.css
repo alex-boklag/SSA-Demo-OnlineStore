@@ -2,11 +2,9 @@
   background-color: #fafafa;
 }
 
-.search__wrapper .uk-search .uk-search-input {
-  border-radius: 10px;
-}
-
-.uk-card {
+.uk-card, 
+.search__wrapper .uk-search .uk-search-input, 
+.filters__wrapper .uk-nav li {
   border-radius: 10px;
 }
 
