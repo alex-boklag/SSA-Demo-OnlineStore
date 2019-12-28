@@ -8,10 +8,11 @@ export class TemplateSearch {
 
   static getFiltersTemplate() {
     return `<ul class="uk-nav uk-nav-default uk-flex uk-flex-around">
-        <li data-value="cat">CATS</a></li>
-        <li data-value="dog">DOGS</li>
-        <li data-value="bird">BIRDS</li>
-        <li data-value="fish">FISHES</li>
+        <li class="uk-button uk-button-default" data-value="all">ALL</a></li>
+        <li class="uk-button uk-button-default" data-value="cat">CATS</a></li>
+        <li class="uk-button uk-button-default" data-value="dog">DOGS</li>
+        <li class="uk-button uk-button-default" data-value="bird">BIRDS</li>
+        <li class="uk-button uk-button-default" data-value="fish">FISHES</li>
     </ul>`;
   }
 }
