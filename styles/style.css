@@ -51,10 +51,14 @@
   transform: scale(1.2);
 }
 
-.uk-pagination li {
+.uk-pagination,.uk-nav li {
   cursor: pointer;
 }
 
 .uk-pagination li:hover {
-  color: rgb(255, 166, 0);
+  color: #b7791f;
+}
+
+.uk-nav li:hover {
+  color: #2f855a;
 }
