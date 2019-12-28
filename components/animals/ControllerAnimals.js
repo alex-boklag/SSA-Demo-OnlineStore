@@ -17,6 +17,7 @@ export class ControllerAnimals {
 
     subscribe('animals-data-updated', this.view.renderAnimalCards.bind(this.view));
     subscribe('search-changed', this.view.renderAnimalCards.bind(this.view));
+    subscribe('filter-changed', this.view.renderAnimalCards.bind(this.view));
   }
 
   handleClickPrevPage() {
