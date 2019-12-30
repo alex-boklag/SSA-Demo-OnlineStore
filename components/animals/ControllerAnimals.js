@@ -6,16 +6,18 @@ export class ControllerAnimals {
     this.publish = publish;
     this.model = new ModelAnimals(publish);
     this.view = new ViewAnimals();
+    this.view.renderAnimalCards(JSON.parse(localStorage.animalsList)
+      .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize)));
     this.listeners = {
       handleClickPrevPage: this.handleClickPrevPage.bind(this),
       handleClickNextPage: this.handleClickNextPage.bind(this),
       handleClickPageNumber: this.handleClickPageNumber.bind(this),
-      handleClickBuy: this.handleClickBuy.bind(this),
-      handleClickDetails: this.handleClickDetails.bind(this), 
+      handleClickBuyRemove: this.handleClickBuyRemove.bind(this),
+      handleClickDetails: this.handleClickDetails.bind(this),
     }
     this.view.addListeners(this.listeners);
 
-    subscribe('animals-data-updated', this.view.renderAnimalCards.bind(this.view));
+    subscribe('data-changed', this.view.renderAnimalCards.bind(this.view));
     subscribe('search-changed', this.view.renderAnimalCards.bind(this.view));
     subscribe('filter-changed', this.view.renderAnimalCards.bind(this.view));
   }
@@ -44,7 +46,9 @@ export class ControllerAnimals {
     }
   }
 
-  handleClickPageNumber(pageNumber) {
+  handleClickPageNumber(ev) {
+    const pageNumber = Number(ev.target.className.split('page-')[1]);
+
     if (!isNaN(pageNumber)) {
       localStorage.offset = pageNumber * localStorage.pageSize - localStorage.pageSize;
 
@@ -56,13 +60,38 @@ export class ControllerAnimals {
     }
   }
 
-  handleClickBuy(animalId) {
-    console.log(`buy ${animalId}`);
-    this.publish('buy-click', animalId);
+  handleClickBuyRemove(ev) {
+    const animalId = Number(ev.target.parentNode.parentNode.dataset.id);
+
+    if (ev.target.innerText === 'BUY') {
+      ev.target.innerText = 'REMOVE';
+      ev.target.style.color = "#feb2b2";
+      ev.target.style.backgroundColor = "#f56565";
+
+      localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
+        if (animal.id === animalId) {
+          animal.buy = true;
+        }
+        return animal;
+      }));
+    }
+    else {
+      ev.target.innerText = 'BUY';
+      ev.target.style.color = "#c6f6d5";
+      ev.target.style.backgroundColor = "#48bb78";
+
+      localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
+        if (animal.id === animalId) {
+          animal.buy = false;
+        }
+        return animal;
+      }));
+    }
+
+    //this.publish('buy-remove-click');
   }
 
-  handleClickDetails(animalId) {
-    console.log(`details ${animalId}`);
-    this.publish('details-click', animalId);
+  handleClickDetails(ev) {
+    this.publish('details-click', ev.target.parentNode.parentNode.dataset);
   }
 }
