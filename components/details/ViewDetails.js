@@ -5,11 +5,15 @@ export class ViewDetails {
     this.modalWrapper = document.querySelector('.details__wrapper');
   }
 
-  addListener(handleDetailsClick) {
-    this.btnDetails.addEventListener('click', handleDetailsClick);
-  }
-
-  renderDetails(animalId) {
-    this.modalWrapper.innerHTML = TemplateDetails.getDetailsTemplate(animalId);
+  renderDetails({ id, species }) {
+    if (species === 'cat' || species === 'dog') {
+      this.modalWrapper.innerHTML = TemplateDetails.getDetailsCatDogTemplate(Number(id));
+    }
+    else if (species === 'bird') {
+      this.modalWrapper.innerHTML = TemplateDetails.getDetailsBirdTemplate(Number(id));
+    }
+    else if (species === 'fish') {
+      this.modalWrapper.innerHTML = TemplateDetails.getDetailsFishTemplate(Number(id));
+    }
   }
 }
