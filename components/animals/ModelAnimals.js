@@ -10,21 +10,21 @@ export class ModelAnimals {
   }
 
   getAnimalsList(link) {
-    fetch(link)
-      .then(response => response.json())
-      .then(animalsList => {
-        this.animalsList = animalsList.map(animal => {
-          animal.buy = false;
-          return animal;
-        })
+    if (!localStorage.animalsList) {
+      fetch(link)
+        .then(response => response.json())
+        .then(animalsList => {
+          this.animalsList = animalsList.map(animal => {
+            animal.buy = false;
+            return animal;
+          })
 
-        localStorage.setItem('animalsList', JSON.stringify(this.animalsList));
-        localStorage.setItem('filteredAnimalsList', JSON.stringify(this.animalsList));
-        localStorage.setItem('offset', 0);
-        localStorage.setItem('pageSize', 20);
-        localStorage.setItem('totalPages', Math.ceil(this.animalsList.length / localStorage.pageSize));
-        
-        this.publish('animals-data-updated', this.animalsList.slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize)));
-      });
+          localStorage.setItem('animalsList', JSON.stringify(this.animalsList));
+          localStorage.setItem('filteredAnimalsList', JSON.stringify(this.animalsList));
+          localStorage.setItem('offset', 0);
+          localStorage.setItem('pageSize', 20);
+          localStorage.setItem('totalPages', Math.ceil(this.animalsList.length / localStorage.pageSize))
+        });
+    }
   }
 }
