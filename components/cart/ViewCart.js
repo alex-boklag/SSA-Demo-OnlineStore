@@ -13,6 +13,9 @@ export class ViewCart {
       if (ev.target.className.includes('button__remove')) {
         handlers.handleRemoveClick(ev);
       }
+      else if (ev.target.className.includes('button__confirm')) {
+        handlers.handleConfirmClick();
+      }
       else if (ev.target.className.includes('button__clear')) {
         handlers.handleClearClick(ev);
       }
