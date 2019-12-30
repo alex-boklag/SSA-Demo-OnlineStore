@@ -1,8 +1,8 @@
 export class TemplateAnimals {
-  static getAnimalsTemplate({ id, image, price, breed, gender, birth_date, weight }) {
+  static getAnimalsTemplate({ id, image, price, breed, gender, birth_date, weight, buy, species }) {
     const months = Math.floor((Date.now() - new Date(birth_date)) / 2592000000);
 
-    return `<div class="uk-card uk-card-default uk-card-hover uk-margin-top uk-margin-bottom" data-id="${id}">
+    return `<div class="uk-card uk-card-default uk-card-hover uk-margin-top uk-margin-bottom" data-id="${id}" data-species="${species}">
       <div class="uk-card-media-top">
         <img src="${image}" alt="${breed}">
       </div>
@@ -15,9 +15,12 @@ export class TemplateAnimals {
           <span class="uk-text-small">${gender} / ${months} months / ${weight} kg</span>
         </p>
       </div>
-      <div class="uk-card-footer uk-text-center uk-padding-small">
-        <button class="uk-button button__buy" type="button" uk-toggle="target: #modal">Buy</button>
-        <button class="uk-button button__details" type="button" uk-toggle="target: #modal-full">Details</button>
+      <div class="uk-card-footer uk-text-center uk-padding-small uk-text-bold">
+        <button class="uk-button button__buy uk-border-rounded uk-width-2-5" type="button" style="${(buy === false) ? 
+          "color: #c6f6d5; background-color: #48bb78" : "color: #feb2b2; background-color: #f56565"}">    
+            ${(buy === false) ? "Buy" : "Remove"}
+        </button>
+        <button class="uk-button button__details uk-border-rounded uk-width-2-5" type="button" uk-toggle="target: #modal-details">Details</button>
       </div>
     </div>`;
   }
