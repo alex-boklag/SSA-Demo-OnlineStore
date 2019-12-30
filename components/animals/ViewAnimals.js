@@ -2,13 +2,21 @@ import { TemplateAnimals } from './TemplateAnimals.js';
 
 export class ViewAnimals {
   constructor() {
-    this.root = document.querySelector('.root');
     this.animalsWrapper = document.querySelector('.animals__wrapper');
     this.paginationWrapper = document.querySelector('.pagination__wrapper');
   }
 
   addListeners(handlers) {
-    this.root.addEventListener('click', ev => {
+    this.animalsWrapper.addEventListener('click', ev => {
+      if (ev.target.className.includes('button__buy')) {
+        handlers.handleClickBuyRemove(ev);
+      }
+      else if (ev.target.className.includes('button__details')) {
+        handlers.handleClickDetails(ev);
+      }
+    });
+
+    this.paginationWrapper.addEventListener('click', ev => {
       if (ev.target.parentNode.parentNode.className.includes('prev')) {
         handlers.handleClickPrevPage();
       }
@@ -16,16 +24,7 @@ export class ViewAnimals {
         handlers.handleClickNextPage();
       }
       else if (ev.target.className.includes('page-')) {
-        const pageNumber = Number(ev.target.className.split('page-')[1]);
-        handlers.handleClickPageNumber(pageNumber);
-      }
-      else if (ev.target.className.includes('button__buy')) {
-        const animalId = Number(ev.target.parentNode.parentNode.dataset.id);
-        handlers.handleClickBuy(animalId);
-      }
-      else if (ev.target.className.includes('button__details')) {
-        const animalId = Number(ev.target.parentNode.parentNode.dataset.id);
-        handlers.handleClickDetails(animalId);
+        handlers.handleClickPageNumber(ev);
       }
     });
   }
