@@ -8,6 +8,7 @@ export class ControllerCart {
     this.listeners = {
       handleCartIconClick: this.handleCartIconClick.bind(this),
       handleRemoveClick: this.handleRemoveClick.bind(this),
+      handleConfirmClick: this.handleConfirmClick.bind(this),
       handleClearClick: this.handleClearClick.bind(this),
     };
     this.view.addListeners(this.listeners);
@@ -32,6 +33,12 @@ export class ControllerCart {
     this.publish('data-changed', JSON.parse(localStorage.animalsList)
       .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize)));
     this.view.renderCart();
+  }
+
+  handleConfirmClick() {
+    const animalsToBuy = JSON.parse(localStorage.animalsList).filter(animal => animal.buy === true);
+
+    alert(`Animals in cart: ${animalsToBuy}`);
   }
 
   handleClearClick(ev) {
