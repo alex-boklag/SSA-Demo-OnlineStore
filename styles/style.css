@@ -1,42 +1,48 @@
-.root {
+.root,
+.cart__wrapper .cart-body {
   background-color: #fafafa;
 }
 
-.uk-card, 
-.search__wrapper .uk-search .uk-search-input, 
-.filters__wrapper .uk-nav li {
+.root .uk-card, 
+.root .cart-button,  
+.filters__wrapper .uk-nav li 
+.cart__wrapper .uk-modal-dialog {
   border-radius: 10px;
 }
 
-.uk-card .button__buy {
-  font-weight: bold;
-  background-color: #48bb78;
-  color: #c6f6d5;
-  border-radius: 10px;
+.root .cart-button {
+  border: none;
+  padding: 0;
 }
 
-.uk-card .button__details {
-  font-weight: bold;
-  background-color: #ecc94b;
-  color: #fefcbf;
-  border-radius: 10px;
-  margin-left: 5px;
+.root .cart-button .cart-icon {
+  color: rgb(155, 155, 155);
 }
 
-.uk-card .button__buy:hover {
+.filters__wrapper ul li {
+  color: rgb(155, 155, 155);
+}
+
+.animals__wrapper .button__buy:hover {
   background-color: #2f855a;
 }
 
-.uk-card .button__details:hover {
+.animals__wrapper .button__details {
+  background-color: #ecc94b;
+  color: #fefcbf;
+  margin-left: 5px;
+}
+
+.animals__wrapper .button__details:hover {
   background-color: #b7791f;
 }
 
-.uk-card-media-top {
+.animals__wrapper-media-top {
   overflow: hidden;
   border-radius: 10px;
 }
 
-.uk-card img {
+.animals__wrapper img {
   width: 300px;
   height: 200px;
   object-fit: cover;
@@ -45,11 +51,16 @@
   border-radius: 10px;
 }
 
-.uk-card img:hover {
+.animals__wrapper .uk-card-media-top {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.animals__wrapper img:hover {
   transform: scale(1.2);
 }
 
-.uk-pagination,.uk-nav li {
+.uk-pagination, .uk-nav li {
   cursor: pointer;
 }
 
@@ -57,6 +68,31 @@
   color: #b7791f;
 }
 
-.uk-nav li:hover {
-  color: #2f855a;
+.cart__wrapper .button__details {
+  background-color: #ecc94b;
+  color: #fefcbf;
+}
+
+.cart__wrapper .button__details:hover {
+  background-color: #b7791f;
+}
+
+.cart__wrapper .button__remove {
+  background-color: #f56565;
+  color: #feb2b2;
+}
+
+.cart__wrapper .button__remove:hover {
+  background-color: #c53030;
+}
+
+.cart__wrapper .button__confirm {
+  background-color: #48bb78;
+  color: #c6f6d5;
+  margin-right: 5px;
+}
+
+.cart__wrapper .button__clear {
+  background-color: #a0aec0;
+  color: #edf2f7;
 }
