@@ -4,8 +4,13 @@ export class ControllerSearch {
   constructor({ subscribe, publish }) {
     this.publish = publish;
     this.view = new ViewSearch(subscribe);
-    this.view.renderSearchAndFilters();
-    this.view.addListeners(this.handleChangeSearch.bind(this), this.handleChangeFilter.bind(this));
+    this.view.renderSearchFiltersSort();
+    this.listeners = {
+      handleChangeSearch: this.handleChangeSearch.bind(this),
+      handleChangeFilter: this.handleChangeFilter.bind(this),
+      handleChangeSort: this.handleChangeSort.bind(this)
+    }
+    this.view.addListeners(this.listeners);
   }
 
   handleChangeSearch(ev) {
@@ -41,6 +46,33 @@ export class ControllerSearch {
     localStorage.offset = 0;
 
     this.publish('filter-changed', JSON
+      .parse(localStorage.filteredAnimalsList)
+      .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize))
+    );
+  }
+
+  handleChangeSort(ev) {
+    const sortBy = ev.target.className.split(' ')[1];
+    let animalsList = JSON.parse(localStorage.filteredAnimalsList);
+
+    switch (sortBy) {
+      case "priceDesc":
+        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a2.price - a1.price));
+        break;
+      case "priceAsc":
+        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a1.price - a2.price));
+        break;
+      case "ageDesc":
+        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a1.birth_date - a2.birth_date));
+        break;
+      case "ageAsc":
+        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a2.birth_date - a1.birth_date));
+        break;
+      default:
+        break;
+    }
+
+    this.publish('sort-changed', JSON
       .parse(localStorage.filteredAnimalsList)
       .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize))
     );
