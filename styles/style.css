@@ -23,6 +23,10 @@
   color: rgb(155, 155, 155);
 }
 
+.filters__wrapper ul li:hover {
+  color: rgb(100, 100, 100);
+}
+
 .animals__wrapper .button__buy:hover {
   background-color: #2f855a;
 }
