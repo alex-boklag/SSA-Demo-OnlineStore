@@ -20,7 +20,9 @@ export class ControllerAnimals {
     subscribe('data-changed', this.view.renderAnimalCards.bind(this.view));
     subscribe('search-changed', this.view.renderAnimalCards.bind(this.view));
     subscribe('filter-changed', this.view.renderAnimalCards.bind(this.view));
+    subscribe('sort-changed', this.view.renderAnimalCards.bind(this.view));
   }
+
 
   handleClickPrevPage() {
     if (localStorage.offset - localStorage.pageSize >= 0) {
@@ -29,7 +31,7 @@ export class ControllerAnimals {
       const data = JSON.parse(localStorage.filteredAnimalsList);
       const curPageData = data.slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
 
-      this.publish('animals-data-updated', curPageData);
+      this.publish('data-changed', curPageData);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
@@ -41,7 +43,7 @@ export class ControllerAnimals {
       const data = JSON.parse(localStorage.filteredAnimalsList);
       const curPageData = data.slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
 
-      this.publish('animals-data-updated', curPageData);
+      this.publish('data-changed', curPageData);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
@@ -55,7 +57,7 @@ export class ControllerAnimals {
       const data = JSON.parse(localStorage.filteredAnimalsList);
       const curPageData = data.slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
 
-      this.publish('animals-data-updated', curPageData);
+      this.publish('data-changed', curPageData);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
