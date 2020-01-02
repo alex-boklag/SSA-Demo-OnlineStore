@@ -9,6 +9,7 @@ export class ViewCart {
 
   addListeners(handlers) {
     this.root.addEventListener('click', ev => handlers.handleCartIconClick(ev));
+
     this.cartWrapper.addEventListener('click', ev => {
       if (ev.target.className.includes('button__remove')) {
         handlers.handleRemoveClick(ev);
@@ -19,6 +20,11 @@ export class ViewCart {
       else if (ev.target.className.includes('button__clear')) {
         handlers.handleClearClick(ev);
       }
+    });
+
+    this.cartWrapper.addEventListener('submit', ev => {
+      ev.preventDefault();
+      handlers.handleSendClick(ev);
     });
   }
 
@@ -46,5 +52,10 @@ export class ViewCart {
 
   prepareCartItem(animal) {
     return TemplateCart.getCartItemTemplate(animal);
+  }
+
+  renderCartUserInfo() {
+    this.cartBody = document.querySelector('.cart-body');
+    this.cartBody.innerHTML = TemplateCart.getUserInfoTemlate();
   }
 }
