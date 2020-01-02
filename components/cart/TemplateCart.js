@@ -37,4 +37,33 @@ export class TemplateCart {
           </div>
   </div>`;
   }
+
+  static getUserInfoTemlate() {
+    return `<form class="user-info-form uk-grid-small" uk-grid>
+      <div class="uk-width-1-2@s">
+        <label for="name">Name</label>
+        <input id="name" class="uk-input" type="text" placeholder="Alex" required 
+          pattern="[A-Z][a-z]+">
+      </div>
+      <div class="uk-width-1-2@s">
+        <label for="telephone">Phone number</label>
+        <input id="telephone" class="uk-input" type="tel" placeholder="38-000-00-00" required
+          pattern="38-0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}">
+      </div>
+      <div class="uk-width-1-2@s">
+        <label for="address">Address</label>
+        <input id="address" class="uk-input" type="text" placeholder="Kalinova 1, 28" required>
+      </div>
+      <div class="uk-width-1-2@s">
+        <label for="email">Email</label>
+        <input id="email" class="uk-input" type="address" placeholder="alex@gmail.com" required
+          pattern="[a-z][a-z0-9.]+@[a-z]+.[a-z]+">
+      </div>
+      <div class="uk-width-1-1">
+        <label for="notes">Notes</label>
+        <textarea id="notes" class="uk-textarea"></textarea>
+      </div>
+      <button class="uk-button uk-button-small" type="submit">Send</button>
+    </form>`;
+  }
 }
