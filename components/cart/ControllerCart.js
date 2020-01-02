@@ -1,7 +1,7 @@
 import { ViewCart } from './ViewCart.js';
 
 export class ControllerCart {
-  constructor({ subscribe, publish }) {
+  constructor({ publish }) {
     this.publish = publish;
     this.view = new ViewCart();
     this.view.renderCartIcon();
@@ -10,6 +10,7 @@ export class ControllerCart {
       handleRemoveClick: this.handleRemoveClick.bind(this),
       handleConfirmClick: this.handleConfirmClick.bind(this),
       handleClearClick: this.handleClearClick.bind(this),
+      handleSendClick: this.handleSendClick.bind(this),
     };
     this.view.addListeners(this.listeners);
   }
@@ -36,22 +37,36 @@ export class ControllerCart {
   }
 
   handleConfirmClick() {
-    const animalsToBuy = JSON.parse(localStorage.animalsList).filter(animal => animal.buy === true);
-
-    alert(`Animals in cart: ${animalsToBuy}`);
+    this.view.renderCartUserInfo();
   }
 
   handleClearClick(ev) {
-    if (ev.target.className.includes('button__clear')) {
-      localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
-        animal.buy = false;
-        return animal;
-      }));
-      this.view.renderCart();
+    localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
+      animal.buy = false;
+      return animal;
+    }));
+    this.view.renderCart();
 
-      this.publish('data-changed', JSON.parse(localStorage.animalsList)
-        .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize)));
+    this.publish('data-changed', JSON.parse(localStorage.animalsList)
+      .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize)));
+  }
 
+  handleSendClick(ev) {
+    if (ev.target.className.includes('user-info-form')) {
+      const order = {
+        client: {
+          name: ev.target.elements[0].value,
+          telephone: ev.target.elements[1].value,
+          address: ev.target.elements[2].value,
+          email: ev.target.elements[3].value,
+          notes: ev.target.elements[4].value
+        },
+        animals: JSON.parse(localStorage.animalsList).filter(animal => animal.buy === true),
+      }
+
+      fetch(`https://api.telegram.org/bot1038146133:AAGVbTT2H_gG7nTGo2z8sJiFAKXItf_DZXM/sendMessage?chat_id=258111327&text=${JSON.stringify(order)}`)
+        .then(d => d.json())
+        .then(data => console.log(data));
     }
   }
 }
