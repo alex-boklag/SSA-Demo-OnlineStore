@@ -32,13 +32,11 @@ export class ViewCart {
     this.root.insertAdjacentHTML('beforeend', TemplateCart.getCartButtonTemplate());
   }
 
-  renderCart() {
+  renderCart(animalsToBuy) {
     this.cartWrapper.innerHTML = TemplateCart.getCartTemplate();
-
     this.cartBody = document.querySelector('.cart-body');
 
     let cartBody = '';
-    const animalsToBuy = JSON.parse(localStorage.animalsList).filter(animal => animal.buy === true);
 
     if (animalsToBuy.length) {
       cartBody = animalsToBuy.map(animal => {

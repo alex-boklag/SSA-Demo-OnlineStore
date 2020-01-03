@@ -51,8 +51,8 @@ export class TemplateCart {
             <input id="name" class="uk-input" type="text" placeholder="Alex" required pattern="[A-Z][a-z]+">
           </div>
           <div class="uk-width-1-2@s">
-            <label for="telephone">Phone number <span class="required">*</span></label>
-            <input id="telephone" class="uk-input" type="tel" placeholder="38-000-00-00" required
+            <label for="phone">Phone number <span class="required">*</span></label>
+            <input id="phone" class="uk-input" type="tel" placeholder="38-000-000-00-00" required
               pattern="38-0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}">
           </div>
           <div class="uk-width-1-2@s">
@@ -74,5 +74,15 @@ export class TemplateCart {
         <button class="uk-button button-success uk-border-rounded" type="submit" form="user-info-form">Send</button>
       </div>
     </div>`;
+  }
+
+  static getTemplateOrder({ name, phone, email, address, notes }, animals) {
+    return `
+    *Name:* ${name.value}
+    *Phone:* ${phone.value}
+    *Email:* ${email.value}
+    *Address:* ${address.value}
+    ${notes ? `*Notes:* ${notes.value}` : ''}
+    *Animals id to buy:* ${animals.map(animal => animal.id)}`;
   }
 }
