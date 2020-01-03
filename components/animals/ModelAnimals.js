@@ -27,4 +27,31 @@ export class ModelAnimals {
         });
     }
   }
+
+  getCurPageData() {
+    return JSON.parse(localStorage.filteredAnimalsList)
+      .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
+  }
+
+  setOffset(offset) {
+    localStorage.setItem('offset', offset);
+  }
+
+  addAnimalToCart(id) {
+    localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
+      if (animal.id === id) {
+        animal.buy = true;
+      }
+      return animal;
+    }));
+  }
+  
+  removeAnimalFromCart(id) {
+    localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
+      if (animal.id === id) {
+        animal.buy = false;
+      }
+      return animal;
+    }));
+  }
 }

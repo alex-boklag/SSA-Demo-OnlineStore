@@ -26,24 +26,19 @@ export class ControllerAnimals {
 
   handleClickPrevPage() {
     if (localStorage.offset - localStorage.pageSize >= 0) {
-      localStorage.offset = localStorage.offset - localStorage.pageSize;
+      this.model.setOffset(localStorage.offset - localStorage.pageSize);
 
-      const data = JSON.parse(localStorage.filteredAnimalsList);
-      const curPageData = data.slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
+      this.publish('data-changed', this.model.getCurPageData());
 
-      this.publish('data-changed', curPageData);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
 
   handleClickNextPage() {
     if (Number(localStorage.offset) + Number(localStorage.pageSize) < JSON.parse(localStorage.filteredAnimalsList).length) {
-      localStorage.offset = Number(localStorage.offset) + Number(localStorage.pageSize);
+      this.model.setOffset(Number(localStorage.offset) + Number(localStorage.pageSize));
 
-      const data = JSON.parse(localStorage.filteredAnimalsList);
-      const curPageData = data.slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
-
-      this.publish('data-changed', curPageData);
+      this.publish('data-changed', this.model.getCurPageData());
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
@@ -52,12 +47,9 @@ export class ControllerAnimals {
     const pageNumber = Number(ev.target.className.split('page-')[1]);
 
     if (!isNaN(pageNumber)) {
-      localStorage.offset = pageNumber * localStorage.pageSize - localStorage.pageSize;
+      this.model.setOffset(pageNumber * localStorage.pageSize - localStorage.pageSize);
 
-      const data = JSON.parse(localStorage.filteredAnimalsList);
-      const curPageData = data.slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
-
-      this.publish('data-changed', curPageData);
+      this.publish('data-changed', this.model.getCurPageData());
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }
@@ -70,24 +62,14 @@ export class ControllerAnimals {
       ev.target.classList.remove('button-success');
       ev.target.classList.add('button-danger');
 
-      localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
-        if (animal.id === animalId) {
-          animal.buy = true;
-        }
-        return animal;
-      }));
+      this.model.addAnimalToCart(animalId);
     }
     else {
       ev.target.innerText = 'BUY';
       ev.target.classList.remove('button-danger');
       ev.target.classList.add('button-success');
 
-      localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
-        if (animal.id === animalId) {
-          animal.buy = false;
-        }
-        return animal;
-      }));
+      this.model.removeAnimalFromCart(animalId);
     }
   }
 
