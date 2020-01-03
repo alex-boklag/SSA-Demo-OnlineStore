@@ -23,7 +23,6 @@ export class ViewCart {
     });
 
     this.cartWrapper.addEventListener('submit', ev => {
-      console.log(ev.target);
       ev.preventDefault();
       handlers.handleSendClick(ev);
     });
