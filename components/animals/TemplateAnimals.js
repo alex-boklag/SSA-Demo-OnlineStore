@@ -16,8 +16,7 @@ export class TemplateAnimals {
         </p>
       </div>
       <div class="uk-card-footer uk-text-center uk-padding-small uk-text-bold">
-        <button class="uk-button button__buy uk-border-rounded uk-width-2-5" type="button" style="${(buy === false) ? 
-          "color: #c6f6d5; background-color: #48bb78" : "color: #feb2b2; background-color: #f56565"}">    
+        <button class="uk-button button__buy__remove ${(buy === false) ? "button-success":"button-danger"} uk-border-rounded uk-width-2-5" type="button">    
             ${(buy === false) ? "Buy" : "Remove"}
         </button>
         <button class="uk-button button__details uk-border-rounded uk-width-2-5" type="button" uk-toggle="target: #modal-details">Details</button>

@@ -67,8 +67,8 @@ export class ControllerAnimals {
 
     if (ev.target.innerText === 'BUY') {
       ev.target.innerText = 'REMOVE';
-      ev.target.style.color = "#feb2b2";
-      ev.target.style.backgroundColor = "#f56565";
+      ev.target.classList.remove('button-success');
+      ev.target.classList.add('button-danger');
 
       localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
         if (animal.id === animalId) {
@@ -79,8 +79,8 @@ export class ControllerAnimals {
     }
     else {
       ev.target.innerText = 'BUY';
-      ev.target.style.color = "#c6f6d5";
-      ev.target.style.backgroundColor = "#48bb78";
+      ev.target.classList.remove('button-danger');
+      ev.target.classList.add('button-success');
 
       localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
         if (animal.id === animalId) {
@@ -89,8 +89,6 @@ export class ControllerAnimals {
         return animal;
       }));
     }
-
-    //this.publish('buy-remove-click');
   }
 
   handleClickDetails(ev) {

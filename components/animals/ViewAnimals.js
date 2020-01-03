@@ -8,7 +8,7 @@ export class ViewAnimals {
 
   addListeners(handlers) {
     this.animalsWrapper.addEventListener('click', ev => {
-      if (ev.target.className.includes('button__buy')) {
+      if (ev.target.className.includes('button__buy__remove')) {
         handlers.handleClickBuyRemove(ev);
       }
       else if (ev.target.className.includes('button__details')) {

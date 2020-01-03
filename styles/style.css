@@ -1,12 +1,8 @@
-.root,
-.cart__wrapper .cart-body {
+.root, .cart__wrapper .cart-body {
   background-color: #fafafa;
 }
 
-.root .uk-card, 
-.root .cart-button,  
-.filters__wrapper .uk-nav li 
-.cart__wrapper .uk-modal-dialog {
+.root .uk-card, .root .cart-button, .filters__wrapper .uk-nav li .cart__wrapper .uk-modal-dialog {
   border-radius: 10px;
 }
 
@@ -19,16 +15,16 @@
   color: rgb(155, 155, 155);
 }
 
+.root li {
+  cursor: pointer;
+}
+
 .filters__wrapper ul li {
   color: rgb(155, 155, 155);
 }
 
 .filters__wrapper ul li:hover {
   color: rgb(100, 100, 100);
-}
-
-.animals__wrapper .button__buy:hover {
-  background-color: #2f855a;
 }
 
 .animals__wrapper .button__details {
@@ -64,12 +60,12 @@
   transform: scale(1.2);
 }
 
-.uk-pagination, .uk-nav li {
-  cursor: pointer;
+.pagination__wrapper li:hover {
+  color: #b7791f;
 }
 
-.uk-pagination li:hover {
-  color: #b7791f;
+.cart__wrapper .required {
+  color: rgb(201, 16, 16);
 }
 
 .cart__wrapper .button__details {
@@ -81,22 +77,32 @@
   background-color: #b7791f;
 }
 
-.cart__wrapper .button__remove {
-  background-color: #f56565;
-  color: #feb2b2;
-}
-
-.cart__wrapper .button__remove:hover {
-  background-color: #c53030;
-}
-
-.cart__wrapper .button__confirm {
-  background-color: #48bb78;
-  color: #c6f6d5;
-  margin-right: 5px;
-}
-
 .cart__wrapper .button__clear {
   background-color: #a0aec0;
   color: #edf2f7;
+  margin-left: 5px;
+}
+
+.cart__wrapper .button__clear:hover {
+  background-color: #4a5568;
+}
+
+.button-success {
+  background-color: #48bb78 !important;
+  color: #c6f6d5 !important;
+  font-weight: bold !important;;
+}
+
+.button-success:hover {
+  background-color: #2f855a !important;
+}
+
+.button-danger {
+  background-color: #f56565 !important;
+  color: #feb2b2 !important;
+  font-weight: bold !important;
+}
+
+.button-danger:hover {
+  background-color: #c53030 !important;
 }

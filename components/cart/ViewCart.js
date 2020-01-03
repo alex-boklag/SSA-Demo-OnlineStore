@@ -4,7 +4,7 @@ export class ViewCart {
   constructor() {
     this.root = document.querySelector('.root');
     this.cartWrapper = document.querySelector('.cart__wrapper');
-    this.cartWrapper.insertAdjacentHTML('afterbegin', TemplateCart.getCartTemplate());
+    this.cartWrapper.innerHTML = TemplateCart.getCartTemplate();
   }
 
   addListeners(handlers) {
@@ -18,11 +18,12 @@ export class ViewCart {
         handlers.handleConfirmClick();
       }
       else if (ev.target.className.includes('button__clear')) {
-        handlers.handleClearClick(ev);
+        handlers.handleClearClick();
       }
     });
 
     this.cartWrapper.addEventListener('submit', ev => {
+      console.log(ev.target);
       ev.preventDefault();
       handlers.handleSendClick(ev);
     });
@@ -33,6 +34,8 @@ export class ViewCart {
   }
 
   renderCart() {
+    this.cartWrapper.innerHTML = TemplateCart.getCartTemplate();
+
     this.cartBody = document.querySelector('.cart-body');
 
     let cartBody = '';
@@ -55,7 +58,6 @@ export class ViewCart {
   }
 
   renderCartUserInfo() {
-    this.cartBody = document.querySelector('.cart-body');
-    this.cartBody.innerHTML = TemplateCart.getUserInfoTemlate();
+    this.cartWrapper.innerHTML = TemplateCart.getUserInfoTemlate();
   }
 }

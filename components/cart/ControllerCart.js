@@ -37,10 +37,13 @@ export class ControllerCart {
   }
 
   handleConfirmClick() {
-    this.view.renderCartUserInfo();
+    const animalsNumber = JSON.parse(localStorage.animalsList).filter(animal => animal.buy === true).length;
+    if (animalsNumber > 0) {
+      this.view.renderCartUserInfo();
+    } 
   }
 
-  handleClearClick(ev) {
+  handleClearClick() {
     localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
       animal.buy = false;
       return animal;
