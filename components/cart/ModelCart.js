@@ -1,7 +1,5 @@
 export class ModelCart {
-  constructor() {
-
-  }
+  constructor() { }
 
   removeAnimalFromCart(id) {
     localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
