@@ -1,8 +1,10 @@
+import { ModelSearch } from './ModelSearch.js';
 import { ViewSearch } from './ViewSearch.js';
 
 export class ControllerSearch {
   constructor({ subscribe, publish }) {
     this.publish = publish;
+    this.model = new ModelSearch();
     this.view = new ViewSearch(subscribe);
     this.view.renderSearchFiltersSort();
     this.listeners = {
@@ -15,66 +17,22 @@ export class ControllerSearch {
 
   handleChangeSearch(ev) {
     const search = ev.target.value.toLowerCase().trim();
+    this.model.applySearch(search);
 
-    let animalsList = JSON.parse(localStorage.animalsList);
-    localStorage.filteredAnimalsList = JSON.stringify(animalsList
-      .filter(animal => animal.breed.toLowerCase().includes(search)));
-
-    localStorage.totalPages = Math.ceil(JSON.parse(localStorage.filteredAnimalsList).length / localStorage.pageSize);
-    localStorage.offset = 0;
-
-    this.publish('search-changed', JSON
-      .parse(localStorage.filteredAnimalsList)
-      .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize))
-    );
+    this.publish('search-changed', this.model.getActualAnimals());
   }
 
   handleChangeFilter(ev) {
     const filter = ev.target.dataset.value.toLowerCase();
+    this.model.applyFilter(filter);
 
-    localStorage.filteredAnimalsList = localStorage.animalsList;
-
-    if (filter !== 'all') {
-      let animalsList = JSON.parse(localStorage.animalsList);
-      localStorage.filteredAnimalsList = JSON.stringify(animalsList
-        .filter(animal => {
-          return filter === animal.species.toLowerCase();
-        }));
-    }
-
-    localStorage.totalPages = Math.ceil(JSON.parse(localStorage.filteredAnimalsList).length / localStorage.pageSize);
-    localStorage.offset = 0;
-
-    this.publish('filter-changed', JSON
-      .parse(localStorage.filteredAnimalsList)
-      .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize))
-    );
+    this.publish('filter-changed', this.model.getActualAnimals());
   }
 
   handleChangeSort(ev) {
     const sortBy = ev.target.className.split(' ')[1];
-    let animalsList = JSON.parse(localStorage.filteredAnimalsList);
+    this.model.apllySort(sortBy); 
 
-    switch (sortBy) {
-      case "priceDesc":
-        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a2.price - a1.price));
-        break;
-      case "priceAsc":
-        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a1.price - a2.price));
-        break;
-      case "ageDesc":
-        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a1.birth_date - a2.birth_date));
-        break;
-      case "ageAsc":
-        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a2.birth_date - a1.birth_date));
-        break;
-      default:
-        break;
-    }
-
-    this.publish('sort-changed', JSON
-      .parse(localStorage.filteredAnimalsList)
-      .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize))
-    );
+    this.publish('sort-changed', this.model.getActualAnimals());
   }
 }
