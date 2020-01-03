@@ -4,7 +4,7 @@ export class TemplateAnimals {
 
     return `<div class="uk-card uk-card-default uk-card-hover uk-margin-top uk-margin-bottom" data-id="${id}" data-species="${species}">
       <div class="uk-card-media-top">
-        <img src="${image}" alt="${breed}">
+        <img src="${image}" alt="${breed}" onerror="this.onerror = null; this.src='assets/no-image-available.png'">
       </div>
       <div class="uk-card-header uk-padding-small">
         <p class="uk-text-large uk-text-bold uk-text-center uk-margin-small">${breed}</p>
