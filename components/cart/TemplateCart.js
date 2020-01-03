@@ -62,7 +62,7 @@ export class TemplateCart {
           <div class="uk-width-1-2@s">
             <label for="email">Email <span class="required">*</span></label>
             <input id="email" class="uk-input" type="address" placeholder="alex@gmail.com" required
-              pattern="[a-z][a-z0-9.]+@[a-z]+.[a-z]+">
+              pattern="[A-Za-z][A-Za-z0-9.]+@[a-z]+.[a-z]+">
           </div>
           <div class="uk-width-1-1">
             <label for="notes">Notes</label>
