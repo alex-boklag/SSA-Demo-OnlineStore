@@ -21,6 +21,8 @@ export class ModelAnimals {
 
           localStorage.setItem('animalsList', JSON.stringify(this.animalsList));
           localStorage.setItem('filteredAnimalsList', JSON.stringify(this.animalsList));
+          localStorage.setItem('searchedAnimalsList', JSON.stringify(this.animalsList));
+          localStorage.setItem('currentAnimalsList', JSON.stringify(this.animalsList));
           localStorage.setItem('offset', 0);
           localStorage.setItem('pageSize', 20);
           localStorage.setItem('totalPages', Math.ceil(this.animalsList.length / localStorage.pageSize))
@@ -29,7 +31,7 @@ export class ModelAnimals {
   }
 
   getCurPageData() {
-    return JSON.parse(localStorage.filteredAnimalsList)
+    return JSON.parse(localStorage.currentAnimalsList)
       .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
   }
 

@@ -2,44 +2,67 @@ export class ModelSearch {
   constructor() { }
 
   applySearch(search) {
-    let animalsList = JSON.parse(localStorage.animalsList);
-    localStorage.filteredAnimalsList = JSON.stringify(animalsList
-      .filter(animal => animal.breed.toLowerCase().includes(search)));
+    const animalsList = JSON.parse(localStorage.animalsList);
+    const filteredAnimalsList = JSON.parse(localStorage.filteredAnimalsList);
+    const searchedAnimalsList = animalsList.filter(animal => animal.breed.toLowerCase().includes(search));
 
-    localStorage.totalPages = Math.ceil(JSON.parse(localStorage.filteredAnimalsList).length / localStorage.pageSize);
+    localStorage.searchedAnimalsList = JSON.stringify(searchedAnimalsList);
+    localStorage.currentAnimalsList = JSON.stringify(searchedAnimalsList
+      .filter(animal => {
+        for (let i = 0; i < filteredAnimalsList.length; i++) {
+          if (animal.id === filteredAnimalsList[i].id) {
+            return true;
+          }
+        }
+        return false;
+      }));
+
+    localStorage.totalPages = Math.ceil(JSON.parse(localStorage.currentAnimalsList).length / localStorage.pageSize);
     localStorage.offset = 0;
   }
 
   applyFilter(filter) {
-    localStorage.filteredAnimalsList = localStorage.animalsList;
+    const animalsList = JSON.parse(localStorage.animalsList);
+    const searchedAnimalsList = JSON.parse(localStorage.searchedAnimalsList);
+    let filteredAnimalsList = [];
 
     if (filter !== 'all') {
-      let animalsList = JSON.parse(localStorage.animalsList);
-      localStorage.filteredAnimalsList = JSON.stringify(animalsList
-        .filter(animal => {
-          return filter === animal.species.toLowerCase();
-        }));
+      filteredAnimalsList = animalsList.filter(animal => filter === animal.species.toLowerCase());
+    }
+    else {
+      filteredAnimalsList = animalsList;
     }
 
-    localStorage.totalPages = Math.ceil(JSON.parse(localStorage.filteredAnimalsList).length / localStorage.pageSize);
+    localStorage.filteredAnimalsList = JSON.stringify(filteredAnimalsList);
+    localStorage.currentAnimalsList = JSON.stringify(filteredAnimalsList
+      .filter(animal => {
+        for (let i = 0; i < searchedAnimalsList.length; i++) {
+          if (animal.id === searchedAnimalsList[i].id) {
+            return true;
+          }
+        }
+        return false;
+      }));
+
+    localStorage.totalPages = Math.ceil(JSON.parse(localStorage.currentAnimalsList).length / localStorage.pageSize);
     localStorage.offset = 0;
   }
 
   apllySort(sortBy) {
-    let animalsList = JSON.parse(localStorage.filteredAnimalsList);
+    let currentAnimalsList = JSON.parse(localStorage.currentAnimalsList);
 
     switch (sortBy) {
       case "priceDesc":
-        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a2.price - a1.price));
+        localStorage.currentAnimalsList = JSON.stringify(currentAnimalsList.sort((a1, a2) => a2.price - a1.price));
         break;
       case "priceAsc":
-        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a1.price - a2.price));
+        localStorage.currentAnimalsList = JSON.stringify(currentAnimalsList.sort((a1, a2) => a1.price - a2.price));
         break;
       case "ageDesc":
-        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a1.birth_date - a2.birth_date));
+        localStorage.currentAnimalsList = JSON.stringify(currentAnimalsList.sort((a1, a2) => a1.birth_date - a2.birth_date));
         break;
       case "ageAsc":
-        localStorage.filteredAnimalsList = JSON.stringify(animalsList.sort((a1, a2) => a2.birth_date - a1.birth_date));
+        localStorage.currentAnimalsList = JSON.stringify(currentAnimalsList.sort((a1, a2) => a2.birth_date - a1.birth_date));
         break;
       default:
         break;
@@ -47,7 +70,7 @@ export class ModelSearch {
   }
 
   getActualAnimals() {
-    return JSON.parse(localStorage.filteredAnimalsList)
+    return JSON.parse(localStorage.currentAnimalsList)
       .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
   };
 }
