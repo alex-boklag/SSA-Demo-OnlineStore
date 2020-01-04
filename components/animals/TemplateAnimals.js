@@ -16,10 +16,10 @@ export class TemplateAnimals {
         </p>
       </div>
       <div class="uk-card-footer uk-text-center uk-padding-small uk-text-bold">
-        <button class="uk-button button__buy__remove ${(buy === false) ? "button-success":"button-danger"} uk-border-rounded uk-width-2-5" type="button">    
+        <button class="uk-button button__buy__remove ${(buy === false) ? "button-success":"button-danger"} uk-border-rounded" type="button">    
             ${(buy === false) ? "Buy" : "Remove"}
         </button>
-        <button class="uk-button button__details uk-border-rounded uk-width-2-5" type="button" uk-toggle="target: #modal-details">Details</button>
+        <button class="uk-button button__details uk-border-rounded" type="button" uk-toggle="target: #modal-details">Details</button>
       </div>
     </div>`;
   }
