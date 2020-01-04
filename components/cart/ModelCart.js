@@ -22,7 +22,7 @@ export class ModelCart {
   }
 
   getActualAnimals() {
-    return JSON.parse(localStorage.animalsList)
+    return JSON.parse(localStorage.currentAnimalsList)
       .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));
   }
 }
