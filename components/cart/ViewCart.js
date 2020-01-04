@@ -57,4 +57,12 @@ export class ViewCart {
   renderCartUserInfo() {
     this.cartWrapper.innerHTML = TemplateCart.getUserInfoTemlate();
   }
+
+  closeCart() {
+    UIkit.modal(this.cartWrapper).hide();
+  }
+
+  showSuccessMessage() {
+    UIkit.modal.alert('Congratulations, your order was sent! Our manager will phone you during the day.');
+  }
 }

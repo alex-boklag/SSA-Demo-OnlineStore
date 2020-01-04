@@ -44,6 +44,8 @@ export class ControllerCart {
 
     this.view.renderCart(this.model.getAnimalsToBuy());
     this.publish('data-changed', this.model.getActualAnimals());
+
+    this.view.closeCart();
   }
 
   handleSendClick(ev) {
@@ -54,6 +56,9 @@ export class ControllerCart {
       fetch(`https://api.telegram.org/bot1038146133:AAGVbTT2H_gG7nTGo2z8sJiFAKXItf_DZXM/sendMessage?chat_id=${myChatId}&text=${encodeURIComponent(text)}&parse_mode=${parse_mode}`)
         .then(d => d.json())
         .then(data => console.log(data));
+
+      this.view.closeCart();
+      this.view.showSuccessMessage();
     }
   }
 }
