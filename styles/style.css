@@ -28,6 +28,7 @@
 }
 
 .animals__wrapper .button__details {
+  width: 130px;
   background-color: #ecc94b;
   color: #fefcbf;
   margin-left: 5px;
@@ -68,15 +69,6 @@
   color: rgb(201, 16, 16);
 }
 
-.cart__wrapper .button__details {
-  background-color: #ecc94b;
-  color: #fefcbf;
-}
-
-.cart__wrapper .button__details:hover {
-  background-color: #b7791f;
-}
-
 .cart__wrapper .button__clear {
   background-color: #a0aec0;
   color: #edf2f7;
@@ -90,7 +82,7 @@
 .button-success {
   background-color: #48bb78 !important;
   color: #c6f6d5 !important;
-  font-weight: bold !important;;
+  font-weight: bold !important;
 }
 
 .button-success:hover {
