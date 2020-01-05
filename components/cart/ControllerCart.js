@@ -19,7 +19,7 @@ export class ControllerCart {
   }
 
   handleCartIconClick(ev) {
-    if (ev.target.parentNode.className && ev.target.parentNode.className.includes('cart-icon')) {
+    if (ev.target.parentNode.className.includes('cart-icon')) {
       this.view.renderCart(this.model.getAnimalsToBuy());
     }
   }
@@ -56,6 +56,9 @@ export class ControllerCart {
       fetch(`https://api.telegram.org/bot1038146133:AAGVbTT2H_gG7nTGo2z8sJiFAKXItf_DZXM/sendMessage?chat_id=${myChatId}&text=${encodeURIComponent(text)}&parse_mode=${parse_mode}`)
         .then(d => d.json())
         .then(data => console.log(data));
+
+      this.model.removeAllAnimalsFromCart();
+      this.publish('data-changed', this.model.getActualAnimals());
 
       this.view.closeCart();
       this.view.showSuccessMessage();
