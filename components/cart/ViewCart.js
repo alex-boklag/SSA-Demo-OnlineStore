@@ -29,10 +29,14 @@ export class ViewCart {
   }
 
   renderCartIcon() {
-    this.root.insertAdjacentHTML('beforeend', TemplateCart.getCartButtonTemplate());
+    this.root.insertAdjacentHTML('beforeend', TemplateCart.getCartIconTemplate());
   }
 
-  renderCart(animalsToBuy) {
+  renderNumberAnimalsToBuy(value) {
+    this.root.insertAdjacentHTML('beforeend', TemplateCart.getCartIconCircleTemplate(value));
+  }
+
+  renderCart(animalsToBuy, totalPrice) {
     this.cartWrapper.innerHTML = TemplateCart.getCartTemplate();
     this.cartBody = document.querySelector('.cart-body');
 
@@ -40,8 +44,9 @@ export class ViewCart {
 
     if (animalsToBuy.length) {
       cartBody = animalsToBuy.map(animal => {
-        return this.prepareCartItem(animal);
+        return TemplateCart.getCartItemTemplate(animal);
       }).join('')
+      cartBody += TemplateCart.getTotalPriceTemplate(totalPrice);
     }
     else {
       cartBody = '<p>The cart is empty :( </p>';
@@ -50,12 +55,8 @@ export class ViewCart {
     this.cartBody.innerHTML = cartBody;
   }
 
-  prepareCartItem(animal) {
-    return TemplateCart.getCartItemTemplate(animal);
-  }
-
   renderCartUserInfo() {
-    this.cartWrapper.innerHTML = TemplateCart.getUserInfoTemlate();
+    this.cartWrapper.innerHTML = TemplateCart.getUserInfoTemplate();
   }
 
   closeCart() {

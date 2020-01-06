@@ -8,6 +8,7 @@ export class ControllerCart {
     this.model = new ModelCart();
     this.view = new ViewCart();
     this.view.renderCartIcon();
+    //this.view.renderNumberAnimalsToBuy(this.model.getNumberAnimalsToBuy());
     this.listeners = {
       handleCartIconClick: this.handleCartIconClick.bind(this),
       handleRemoveClick: this.handleRemoveClick.bind(this),
@@ -20,7 +21,7 @@ export class ControllerCart {
 
   handleCartIconClick(ev) {
     if (ev.target.parentNode.className.includes('cart-icon')) {
-      this.view.renderCart(this.model.getAnimalsToBuy());
+      this.view.renderCart(this.model.getAnimalsToBuy(), this.model.getTotalPriceAnimalsFromCart());
     }
   }
 
@@ -51,7 +52,7 @@ export class ControllerCart {
   handleSendClick(ev) {
     if (ev.target.className.includes('user-info-form')) {
       const myChatId = 258111327, groupChatId = -377489566, parse_mode = 'MarkDown';
-      const text = TemplateCart.getTemplateOrder(ev.target.elements, this.model.getAnimalsToBuy());
+      const text = TemplateCart.getTemplateOrder(ev.target.elements, this.model.getAnimalsToBuy(), this.model.getTotalPriceAnimalsFromCart());
 
       fetch(`https://api.telegram.org/bot1038146133:AAGVbTT2H_gG7nTGo2z8sJiFAKXItf_DZXM/sendMessage?chat_id=${myChatId}&text=${encodeURIComponent(text)}&parse_mode=${parse_mode}`)
         .then(d => d.json())

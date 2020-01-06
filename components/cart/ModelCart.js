@@ -21,6 +21,19 @@ export class ModelCart {
     return JSON.parse(localStorage.animalsList).filter(animal => animal.buy === true);
   }
 
+  getNumberAnimalsToBuy() {
+    return JSON.parse(localStorage.animalsList).filter(animal => animal.buy === true).length;
+  }
+
+  getTotalPriceAnimalsFromCart() {
+    return JSON.parse(localStorage.animalsList).reduce((total, animal) => {
+      if (animal.buy === true) {
+        return total + animal.price;
+      }
+      return total;
+    }, 0);
+  }
+
   getActualAnimals() {
     return JSON.parse(localStorage.currentAnimalsList)
       .slice(localStorage.offset, Number(localStorage.offset) + Number(localStorage.pageSize));

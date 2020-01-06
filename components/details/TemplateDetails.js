@@ -1,9 +1,9 @@
+import { calcBirthDay } from '../../helpers/calcBirthDay.js';
+
 export class TemplateDetails {
   static getDetailsCatDogTemplate(animalId) {
     const animal = JSON.parse(localStorage.animalsList).filter(animal => animal.id === animalId)[0];
-
     const title = animal.species[0].toUpperCase() + animal.species.substring(1) + ' ' + animal.breed;
-    const months = Math.floor((Date.now() - new Date(animal.birth_date)) / 2592000000);
     const sterile = (animal.is_sterile) ? 'Sterile' : 'Non-sterile';
 
     return `<div class="uk-modal-dialog">
@@ -16,7 +16,7 @@ export class TemplateDetails {
                     <span>Price: $${animal.price}</span><br>
                     <span>Gender: ${animal.gender}</span><br>
                     <span>Weight: ${animal.weight} kg</span><br>
-                    <span>Age: ${months} months</span><br>
+                    <span>Birthday: ${calcBirthDay(animal.birth_date)}</span><br>
                     <span>Color: ${animal.color}</span><br>
                     <span>Hair: ${animal.hair}</span><br>
                     <span>${sterile}</span><br>
@@ -28,9 +28,7 @@ export class TemplateDetails {
 
   static getDetailsFishTemplate(animalId) {
     const animal = JSON.parse(localStorage.animalsList).filter(animal => animal.id === animalId)[0];
-
     const title = animal.species[0].toUpperCase() + animal.species.substring(1) + ' ' + animal.breed;
-    const months = Math.floor((Date.now() - new Date(animal.birth_date)) / 2592000000);
 
     return `<div class="uk-modal-dialog">
           <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
@@ -42,7 +40,7 @@ export class TemplateDetails {
                     <span>Price: $${animal.price}</span><br>
                     <span>Gender: ${animal.gender}</span><br>
                     <span>Weight: ${animal.weight} kg</span><br>
-                    <span>Age: ${months} months</span><br>
+                    <span>Birthday: ${calcBirthDay(animal.birth_date)}</span><br>
                     <span>Color: ${animal.color}</span><br>
                     <span>Water type: ${animal.water_type}</span><br>
                     <span>Temper: ${animal.temper}</span><br>
@@ -54,9 +52,7 @@ export class TemplateDetails {
 
   static getDetailsBirdTemplate(animalId) {
     const animal = JSON.parse(localStorage.animalsList).filter(animal => animal.id === animalId)[0];
-
     const title = animal.species[0].toUpperCase() + animal.species.substring(1) + ' ' + animal.breed;
-    const months = Math.floor((Date.now() - new Date(animal.birth_date)) / 2592000000);
 
     return `<div class="uk-modal-dialog">
           <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
@@ -68,7 +64,7 @@ export class TemplateDetails {
                     <span>Price: $${animal.price}</span><br>
                     <span>Gender: ${animal.gender}</span><br>
                     <span>Weight: ${animal.weight} kg</span><br>
-                    <span>Age: ${months} months</span><br>
+                    <span>Birthday: ${calcBirthDay(animal.birth_date)}</span><br>
                     <span>Color: ${animal.color}</span><br>
                     <span>Type: ${animal.type}</span><br>
                     <span>Activity: ${animal.activity}</span><br>

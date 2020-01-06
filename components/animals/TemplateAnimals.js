@@ -1,6 +1,8 @@
+import { calcAgeInMonths } from '../../helpers/calcAgeInMonths.js';
+
 export class TemplateAnimals {
   static getAnimalsTemplate({ id, image, price, breed, gender, birth_date, weight, buy, species }) {
-    const months = Math.floor((Date.now() - new Date(birth_date)) / 2592000000);
+    const months = calcAgeInMonths(birth_date);
 
     return `<div class="uk-card uk-card-default uk-card-hover uk-margin-top uk-margin-bottom" data-id="${id}" data-species="${species}">
       <div class="uk-card-media-top">
@@ -12,7 +14,7 @@ export class TemplateAnimals {
       </div>
       <div class="uk-card-body uk-text-center uk-padding-small">
         <p class="uk-text-bold">
-          <span class="uk-text-small">${gender} / ${months} months / ${weight} kg</span>
+          <span class="uk-text-small">${gender} / ${months} ${(months === 1) ? 'month' : 'months'} / ${weight} kg </span>
         </p>
       </div>
       <div class="uk-card-footer uk-text-center uk-padding-small uk-text-bold">

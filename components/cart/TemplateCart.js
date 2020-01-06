@@ -1,8 +1,14 @@
+import { calcAgeInMonths } from '../../helpers/calcAgeInMonths.js';
+
 export class TemplateCart {
-  static getCartButtonTemplate() {
+  static getCartIconTemplate() {
     return `<button class="cart-button uk-button uk-button-default uk-position-top-right uk-position-small" type="button" uk-toggle="target: #modal-cart">
       <span class="cart-icon" uk-icon="cart" ratio="2"></span>
     </button>`;
+  }
+
+  static getCartIconCircleTemplate(value) {
+    return `<div class="cart-icon-circle uk-text-center uk-position-top-right uk-position-small">${value}</div>`;
   }
 
   static getCartTemplate() {
@@ -20,25 +26,27 @@ export class TemplateCart {
   }
 
   static getCartItemTemplate({ id, image, price, breed, gender, birth_date, weight }) {
-    const months = Math.floor((Date.now() - new Date(birth_date)) / 2592000000);
-
     return `<div class="animal-item uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin uk-card-small" data-id="${id}" uk-grid>
           <div class="uk-card-media-left uk-cover-container uk-border-rounded">
-              <img class="animal-image" src="${image}" alt="" uk-cover>
+              <img class="animal-image" src="${image}" alt="" uk-cover onerror="this.onerror = null; this.src='assets/no-image-available.png'">
               <canvas width="600" height="200"></canvas>
           </div>
           <div class="uk-card-body uk-flex-row uk-text-bold">
               <h2 class="uk-card-title uk-margin-remove-bottom">${breed}</h3>
               <p class="uk-margin-remove-top uk-margin-remove-bottom">
                 <span class="uk-text-bold uk-text-center">$${price}</span><br>
-                <span class="uk-text-small">${gender} / ${months} months / ${weight} kg</span>
+                <span class="uk-text-small">${gender} / ${calcAgeInMonths(birth_date)} months / ${weight} kg</span>
               </p>
               <button class="button__remove button-danger uk-button uk-button-small uk-width-3-5 uk-border-rounded" type="button">Remove</button>
           </div>
   </div>`;
   }
 
-  static getUserInfoTemlate() {
+  static getTotalPriceTemplate(totalPrice) {
+    return `<p class="uk-text-large">Total price: ${totalPrice}$</p>`
+  }
+
+  static getUserInfoTemplate() {
     return `<div class="uk-modal-dialog uk-margin-auto-vertical">
       <button class="uk-modal-close-default" type="button" uk-close></button>
       <div class="uk-modal-header">
@@ -76,13 +84,14 @@ export class TemplateCart {
     </div>`;
   }
 
-  static getTemplateOrder({ name, phone, email, address, notes }, animals) {
+  static getTemplateOrder({ name, phone, email, address, notes }, animals, totalPrice) {
     return `
     *Name:* ${name.value}
     *Phone:* ${phone.value}
     *Email:* ${email.value}
     *Address:* ${address.value}
     ${notes ? `*Notes:* ${notes.value}` : ''}
-    *Animals id to buy:* ${animals.map(animal => animal.id)}`;
+    *Animals id to buy:* ${animals.map(animal => animal.id)}
+    *Total price:* ${totalPrice}`;
   }
 }
