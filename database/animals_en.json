@@ -3346,7 +3346,7 @@
     "price": 0.5,
     "gender": "male",
     "weight": 0.5,
-    "birth_date": 1557014400,
+    "birth_date": 1557014400000,
     "color": "white",
     "breed": "Labrador",
     "image": "https://lucasylola.es/blog/wp-content/uploads/2019/03/Labrador-retriever.jpg",
