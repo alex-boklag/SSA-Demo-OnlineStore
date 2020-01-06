@@ -86,12 +86,12 @@ export class TemplateCart {
 
   static getTemplateOrder({ name, phone, email, address, notes }, animals, totalPrice) {
     return `
-    *Name:* ${name.value}
+    *Client name:* ${name.value}
     *Phone:* ${phone.value}
     *Email:* ${email.value}
     *Address:* ${address.value}
     ${notes ? `*Notes:* ${notes.value}` : ''}
     *Animals id to buy:* ${animals.map(animal => animal.id)}
-    *Total price:* ${totalPrice}`;
+    *Total price:* ${totalPrice}$`;
   }
 }
