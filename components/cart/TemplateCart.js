@@ -60,8 +60,8 @@ export class TemplateCart {
           </div>
           <div class="uk-width-1-2@s">
             <label for="phone">Phone number <span class="required">*</span></label>
-            <input id="phone" class="uk-input" type="tel" placeholder="38-000-000-00-00" required
-              pattern="38-0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}">
+            <input id="phone" class="uk-input" type="tel" placeholder="380501234567" required
+              pattern="380[0-9]{9}">
           </div>
           <div class="uk-width-1-2@s">
             <label for="address">Address <span class="required">*</span></label>
