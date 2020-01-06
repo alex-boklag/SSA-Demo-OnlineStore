@@ -9,10 +9,11 @@
 .root .cart-button {
   border: none;
   padding: 0;
+  color: rgb(155, 155, 155);
 }
 
-.root .cart-button .cart-icon {
-  color: rgb(155, 155, 155);
+.root .cart-button:hover {
+  color: rgb(100, 100, 100);
 }
 
 .root li {
