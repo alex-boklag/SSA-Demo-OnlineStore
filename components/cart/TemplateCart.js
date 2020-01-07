@@ -2,13 +2,9 @@ import { calcAgeInMonths } from '../../helpers/calcAgeInMonths.js';
 
 export class TemplateCart {
   static getCartIconTemplate() {
-    return `<button class="cart-button uk-button uk-button-default uk-position-top-right uk-position-small" type="button" uk-toggle="target: #modal-cart">
+    return `<button class="cart-button uk-button uk-button-default uk-position-top-right uk-position-small" data-after="0" type="button" uk-toggle="target: #modal-cart">
       <span class="cart-icon" uk-icon="cart" ratio="2"></span>
     </button>`;
-  }
-
-  static getCartIconCircleTemplate(value) {
-    return `<div class="cart-icon-circle uk-text-center uk-position-top-right uk-position-small">${value}</div>`;
   }
 
   static getCartTemplate() {
@@ -43,7 +39,7 @@ export class TemplateCart {
   }
 
   static getTotalPriceTemplate(totalPrice) {
-    return `<p class="uk-text-large">Total price: ${totalPrice}$</p>`
+    return `<p class="uk-text-large">Total price: ${totalPrice.toFixed(2)}$</p>`
   }
 
   static getUserInfoTemplate() {
@@ -86,12 +82,13 @@ export class TemplateCart {
 
   static getTemplateOrder({ name, phone, email, address, notes }, animals, totalPrice) {
     return `
-    *Client name:* ${name.value}
-    *Phone:* ${phone.value}
-    *Email:* ${email.value}
-    *Address:* ${address.value}
-    ${notes ? `*Notes:* ${notes.value}` : ''}
-    *Animals id to buy:* ${animals.map(animal => animal.id)}
-    *Total price:* ${totalPrice}$`;
+      *Client name:* ${name.value}
+      *Phone:* ${phone.value}
+      *Email:* ${email.value}
+      *Address:* ${address.value}
+      *Notes:* ${notes.value}
+      *Animals id to buy:* ${animals.map(animal => animal.id)}
+      *Total price:* ${totalPrice.toFixed(2)}$
+    `;
   }
 }

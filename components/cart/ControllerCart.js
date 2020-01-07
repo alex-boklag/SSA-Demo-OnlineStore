@@ -3,12 +3,12 @@ import { ViewCart } from './ViewCart.js';
 import { TemplateCart } from './TemplateCart.js';
 
 export class ControllerCart {
-  constructor({ publish }) {
+  constructor({ publish, subscribe }) {
     this.publish = publish;
     this.model = new ModelCart();
     this.view = new ViewCart();
     this.view.renderCartIcon();
-    //this.view.renderNumberAnimalsToBuy(this.model.getNumberAnimalsToBuy());
+    this.view.changeCartCounter(this.model.getNumberAnimalsToBuy());
     this.listeners = {
       handleCartIconClick: this.handleCartIconClick.bind(this),
       handleRemoveClick: this.handleRemoveClick.bind(this),
@@ -17,21 +17,23 @@ export class ControllerCart {
       handleSendClick: this.handleSendClick.bind(this),
     };
     this.view.addListeners(this.listeners);
+    subscribe('counter-changed', this.view.changeCartCounter);
   }
 
   handleCartIconClick(ev) {
-    if (ev.target.parentNode.className.includes('cart-icon')) {
-      this.view.renderCart(this.model.getAnimalsToBuy(), this.model.getTotalPriceAnimalsFromCart());
+    if (ev.target.parentNode.classList.contains('cart-icon')) {
+      this.view.renderCart(this.model.getAnimalsToBuy(), this.model.getTotalPriceAnimalsToBuy());
     }
   }
 
   handleRemoveClick(ev) {
-
     const animalId = Number(ev.target.parentNode.parentNode.dataset.id);
     this.model.removeAnimalFromCart(animalId);
 
-    this.view.renderCart(this.model.getAnimalsToBuy());
     this.publish('data-changed', this.model.getActualAnimals());
+    this.view.renderCart(this.model.getAnimalsToBuy(), this.model.getTotalPriceAnimalsToBuy());
+  
+    this.view.changeCartCounter(this.model.getNumberAnimalsToBuy());
   }
 
   handleConfirmClick() {
@@ -46,13 +48,15 @@ export class ControllerCart {
     this.view.renderCart(this.model.getAnimalsToBuy());
     this.publish('data-changed', this.model.getActualAnimals());
 
+    this.view.changeCartCounter(this.model.getNumberAnimalsToBuy());
+
     this.view.closeCart();
   }
 
   handleSendClick(ev) {
-    if (ev.target.className.includes('user-info-form')) {
+    if (ev.target.classList.contains('user-info-form')) {
       const myChatId = 258111327, groupChatId = -377489566, parse_mode = 'MarkDown';
-      const text = TemplateCart.getTemplateOrder(ev.target.elements, this.model.getAnimalsToBuy(), this.model.getTotalPriceAnimalsFromCart());
+      const text = TemplateCart.getTemplateOrder(ev.target.elements, this.model.getAnimalsToBuy(), this.model.getTotalPriceAnimalsToBuy());
 
       fetch(`https://api.telegram.org/bot1038146133:AAGVbTT2H_gG7nTGo2z8sJiFAKXItf_DZXM/sendMessage?chat_id=${myChatId}&text=${encodeURIComponent(text)}&parse_mode=${parse_mode}`)
         .then(d => d.json())
@@ -61,6 +65,7 @@ export class ControllerCart {
       this.model.removeAllAnimalsFromCart();
       this.publish('data-changed', this.model.getActualAnimals());
 
+      this.view.changeCartCounter(this.model.getNumberAnimalsToBuy());
       this.view.closeCart();
       this.view.showSuccessMessage();
     }

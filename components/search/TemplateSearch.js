@@ -8,11 +8,11 @@ export class TemplateSearch {
 
   static getFiltersAndSortTemplate() {
     return `<ul class="filters uk-nav uk-nav-default uk-flex uk-flex-center uk-text-bold">
-        <li class="uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="all">ALL</li>
-        <li class="uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="cat">CATS</li>
-        <li class="uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="dog">DOGS</li>
-        <li class="uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="fish">FISHES</li>
-        <li class="uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="bird">BIRDS</li>
+        <li class="filter filter-highlight uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="all">ALL</li>
+        <li class="filter uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="cat">CATS</li>
+        <li class="filter uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="dog">DOGS</li>
+        <li class="filter uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="fish">FISHES</li>
+        <li class="filter uk-button uk-button-default uk-margin-small-right uk-border-rounded" data-value="bird">BIRDS</li>
         <li class="uk-button uk-button-default uk-border-rounded" type="button">Sort by</li>
           <div uk-dropdown>
               <ul class="uk-nav uk-dropdown-nav">

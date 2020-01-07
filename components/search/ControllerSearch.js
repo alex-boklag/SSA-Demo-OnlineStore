@@ -25,6 +25,7 @@ export class ControllerSearch {
   handleChangeFilter(ev) {
     const filter = ev.target.dataset.value.toLowerCase();
     this.model.applyFilter(filter);
+    this.view.highlightCurrentFilter(filter);
 
     this.publish('filter-changed', this.model.getActualAnimals());
   }

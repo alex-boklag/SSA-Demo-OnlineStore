@@ -8,10 +8,10 @@ export class ViewAnimals {
 
   addListeners(handlers) {
     this.animalsWrapper.addEventListener('click', ev => {
-      if (ev.target.className.includes('button__buy__remove')) {
+      if (ev.target.classList.contains('button__buy__remove')) {
         handlers.handleClickBuyRemove(ev);
       }
-      else if (ev.target.className.includes('button__details')) {
+      else if (ev.target.classList.contains('button__details')) {
         handlers.handleClickDetails(ev);
       }
     });
@@ -43,5 +43,15 @@ export class ViewAnimals {
 
   prepareAnimalCard(animal) {
     return TemplateAnimals.getAnimalsTemplate(animal);
+  }
+
+  highlightCurrentFilter(curFilter) {
+    const allFilters = [...document.querySelectorAll('.filter')];
+
+    allFilters.forEach(filter => {
+      (filter.dataset.value === curFilter)
+        ? filter.classList.add('filter-highlight')
+        : filter.classList.remove('filter-highlight')
+    });
   }
 }

@@ -11,13 +11,13 @@ export class ViewCart {
     this.root.addEventListener('click', ev => handlers.handleCartIconClick(ev));
 
     this.cartWrapper.addEventListener('click', ev => {
-      if (ev.target.className.includes('button__remove')) {
+      if (ev.target.classList.contains('button__remove')) {
         handlers.handleRemoveClick(ev);
       }
-      else if (ev.target.className.includes('button__confirm')) {
+      else if (ev.target.classList.contains('button__confirm')) {
         handlers.handleConfirmClick();
       }
-      else if (ev.target.className.includes('button__clear')) {
+      else if (ev.target.classList.contains('button__clear')) {
         handlers.handleClearClick();
       }
     });
@@ -32,8 +32,8 @@ export class ViewCart {
     this.root.insertAdjacentHTML('beforeend', TemplateCart.getCartIconTemplate());
   }
 
-  renderNumberAnimalsToBuy(value) {
-    this.root.insertAdjacentHTML('beforeend', TemplateCart.getCartIconCircleTemplate(value));
+  changeCartCounter(value) {
+    document.querySelector('.cart-button').dataset.after = value;
   }
 
   renderCart(animalsToBuy, totalPrice) {

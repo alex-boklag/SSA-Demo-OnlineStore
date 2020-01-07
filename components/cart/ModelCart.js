@@ -25,7 +25,7 @@ export class ModelCart {
     return JSON.parse(localStorage.animalsList).filter(animal => animal.buy === true).length;
   }
 
-  getTotalPriceAnimalsFromCart() {
+  getTotalPriceAnimalsToBuy() {
     return JSON.parse(localStorage.animalsList).reduce((total, animal) => {
       if (animal.buy === true) {
         return total + animal.price;

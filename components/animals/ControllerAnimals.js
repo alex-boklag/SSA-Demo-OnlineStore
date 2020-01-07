@@ -63,6 +63,8 @@ export class ControllerAnimals {
       ev.target.classList.add('button-danger');
 
       this.model.addAnimalToCart(animalId);
+
+      this.publish('counter-changed', this.model.getNumberAnimalsToBuy());
     }
     else {
       ev.target.innerText = 'BUY';
@@ -70,6 +72,8 @@ export class ControllerAnimals {
       ev.target.classList.add('button-success');
 
       this.model.removeAnimalFromCart(animalId);
+
+      this.publish('counter-changed', this.model.getNumberAnimalsToBuy());
     }
   }
 

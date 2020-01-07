@@ -47,7 +47,7 @@ export class ModelAnimals {
       return animal;
     }));
   }
-  
+
   removeAnimalFromCart(id) {
     localStorage.animalsList = JSON.stringify(JSON.parse(localStorage.animalsList).map(animal => {
       if (animal.id === id) {
@@ -55,5 +55,9 @@ export class ModelAnimals {
       }
       return animal;
     }));
+  }
+
+  getNumberAnimalsToBuy() {
+    return JSON.parse(localStorage.animalsList).filter(animal => animal.buy === true).length;
   }
 }
