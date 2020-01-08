@@ -56,17 +56,17 @@ export class TemplateCart {
           </div>
           <div class="uk-width-1-2@s">
             <label for="phone">Phone number <span class="required">*</span></label>
-            <input id="phone" class="uk-input" type="tel" placeholder="380501234567" required
+            <input id="phone" class="uk-input" type="tel" placeholder="380981234567" required
               pattern="380[0-9]{9}">
           </div>
           <div class="uk-width-1-2@s">
             <label for="address">Address <span class="required">*</span></label>
-            <input id="address" class="uk-input" type="text" placeholder="Kalinova 1, 28" required>
+            <input id="address" class="uk-input" type="text" placeholder="Kalinova 12/34" required>
           </div>
           <div class="uk-width-1-2@s">
             <label for="email">Email <span class="required">*</span></label>
             <input id="email" class="uk-input" type="address" placeholder="alex@gmail.com" required
-              pattern="[A-Za-z][A-Za-z0-9.]+@[a-z]+.[a-z]+">
+              pattern="[A-Za-z][A-Za-z0-9.]+@[A-Za-z]+.[A-Za-z]+">
           </div>
           <div class="uk-width-1-1">
             <label for="notes">Notes</label>
@@ -81,14 +81,6 @@ export class TemplateCart {
   }
 
   static getTemplateOrder({ name, phone, email, address, notes }, animals, totalPrice) {
-    return `
-      *Client name:* ${name.value}
-      *Phone:* ${phone.value}
-      *Email:* ${email.value}
-      *Address:* ${address.value}
-      *Notes:* ${notes.value}
-      *Animals id to buy:* ${animals.map(animal => animal.id)}
-      *Total price:* ${totalPrice.toFixed(2)}$
-    `;
+    return `*New order!* \n\n*Client name:* ${name.value}\n*Phone:* ${phone.value} \n*Email:* ${email.value} \n*Address:* ${address.value} \n*Notes:* ${notes.value} \n\n*Animals to buy:* \n${animals.map(animal => `\(${animal.id}\) - ${animal.breed} - ${animal.price.toFixed(2)}$`).join('\n')} \n*Total price:* ${totalPrice.toFixed(2)}$`;
   }
 }
