@@ -58,7 +58,7 @@ export class ControllerCart {
       const myChatId = 258111327, groupChatId = -377489566, parse_mode = 'MarkDown';
       const text = TemplateCart.getTemplateOrder(ev.target.elements, this.model.getAnimalsToBuy(), this.model.getTotalPriceAnimalsToBuy());
 
-      fetch(`https://api.telegram.org/bot1038146133:AAGVbTT2H_gG7nTGo2z8sJiFAKXItf_DZXM/sendMessage?chat_id=${groupChatId}&text=${encodeURIComponent(text)}&parse_mode=${parse_mode}`)
+      fetch(`https://api.telegram.org/bot1038146133:AAGVbTT2H_gG7nTGo2z8sJiFAKXItf_DZXM/sendMessage?chat_id=${myChatId}&text=${encodeURIComponent(text)}&parse_mode=${parse_mode}`)
         .then(d => d.json())
         .then(data => console.log(data));
 
