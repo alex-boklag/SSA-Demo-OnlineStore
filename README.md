@@ -1,2 +1,2 @@
-# SSA-Demo-OnlineStore
- SoftServe Academy Demo (Animals online store)
+# Animals online store
+ 
